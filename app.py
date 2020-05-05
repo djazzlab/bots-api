@@ -6,4 +6,4 @@ app = Flask(__name__)
 def hello():
     return {'hello': 'world'}
 
-app.run()
+app.run(host = '0.0.0.0')
