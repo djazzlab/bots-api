@@ -4,5 +4,7 @@ from flask_restful import Resource as APIResource
 class CubeSolverRgbToLab(APIResource):
     def get(self, Red, Green, Blue):
         return JsonResponse({
-            'hello': 'world'
+            'Red': Red,
+            'Green': Green,
+            'Blue': Blue
         })
