@@ -1,5 +1,5 @@
 # Import API controllers
-from CubeSolver import CubeSolverRgbToLab
+from Resources.CubeSolver import CubeSolverRgbToLab
 
 def InitializeRoutes(BotsAPI):
     # CubeSolver

@@ -1,5 +1,5 @@
 from flask_restful import Api
-from Router import InitializeRoutes
+from Resources.Router import InitializeRoutes
 
 # Create Flask APP
 App = Flask(__name__)
