@@ -1,9 +1,12 @@
 from flask import Flask
+from flask import jsonify as JsonResponse
 
-app = Flask(__name__)
+App = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return {'hello': 'world'}
+@App.route('/')
+def Hello():
+    return JsonResponse({
+        'hello': 'world'
+    })
 
-app.run(host = '0.0.0.0')
+App.run(host = '0.0.0.0')
