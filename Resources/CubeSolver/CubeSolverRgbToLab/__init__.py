@@ -1,7 +1,7 @@
 from flask import jsonify as JsonResponse
-from flask_restful import Resource as APIResource
+from flask_restful import Resource
 
-class CubeSolverRgbToLab(APIResource):
+class CubeSolverRgbToLab(Resource):
     def get(self, Red, Green, Blue):
         return JsonResponse({
             'hello': 'world'
