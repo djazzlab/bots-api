@@ -16,33 +16,30 @@ class CubeSolverRgbToLab(APIResource):
             'red',
             help = 'Red argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
             location = 'form',
-            nullable = False,
-            required = True,
+            store_missing = False,
             type = int
         )
         self.__ArgsParser.add_argument(
             'green',
             help = 'Green argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
             location = 'form',
-            nullable = False,
-            required = True,
+            store_missing = False,
             type = int
         )
         self.__ArgsParser.add_argument(
             'blue',
             help = 'Blue argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
             location = 'form',
-            nullable = False,
-            required = True,
+            store_missing = False,
             type = int
         )
 
     def get(self):
         try:
             Args = self.__ArgsParser.parse_args(strict = True)
-            Red = Args['red']
-            Green = Args['green']
-            Blue = Args['blue']
+            Red = Args['red'] if 'red' in Args else raise Exception('Your request body must have a value for the red argument')
+            Green = Args['green'] if 'green' in Args else raise Exception('Your request body must have a value for the green argument')
+            Blue = Args['blue'] if 'green' in Args else raise Exception('Your request body must have a value for the blue argument')
 
             if Red < 0 or Red > 255:
                 raise Exception('Red integer should be greater or equal to 0 and lesser or equal to 255')
