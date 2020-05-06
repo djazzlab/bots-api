@@ -34,10 +34,9 @@ class CubeSolverRgbToLab(APIResource):
             type = int
         )
 
-    def get(self):
+    def post(self):
         try:
             Args = self.__ArgsParser.parse_args(strict = True)
-            print('yolo')
             Red = Args['red']
             Green = Args['green']
             Blue = Args['blue']
