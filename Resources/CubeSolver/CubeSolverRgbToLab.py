@@ -16,34 +16,34 @@ ArgsParser.add_argument('blue', type = int, help = 'Blue code of the RGB color t
 
 class CubeSolverRgbToLab(APIResource):
     def get(self):
-        Args = ArgsParser.parse_args()
-        Red = Args['red']
-        Green = Args['green']
-        Blue = Args['blue']
+        try:
+            Args = ArgsParser.parse_args()
+            Red = Args['red']
+            Green = Args['green']
+            Blue = Args['blue']
 
-        if Red < 0 or Red > 255:
-            return MakeResponse(
-                JsonResponse({
-                    'Message': 'Red integer should be greater or equal to 0 and lesser or equal to 255'
-                }),
-                500
-            )
-        elif Green < 0 or Green > 255:
-            return MakeResponse(
-                JsonResponse({
-                    'Message': 'Green integer should be greater or equal to 0 and lesser or equal to 255'
-                }),
-                500
-            )
-        elif Blue < 0 or Blue > 255:
-            return MakeResponse(
-                JsonResponse({
-                    'Message': 'Blue integer should be greater or equal to 0 and lesser or equal to 255'
-                }),
-                500
-            )
-        else:
-            try:
+            if Red < 0 or Red > 255:
+                return MakeResponse(
+                    JsonResponse({
+                        'Message': 'Red integer should be greater or equal to 0 and lesser or equal to 255'
+                    }),
+                    500
+                )
+            elif Green < 0 or Green > 255:
+                return MakeResponse(
+                    JsonResponse({
+                        'Message': 'Green integer should be greater or equal to 0 and lesser or equal to 255'
+                    }),
+                    500
+                )
+            elif Blue < 0 or Blue > 255:
+                return MakeResponse(
+                    JsonResponse({
+                        'Message': 'Blue integer should be greater or equal to 0 and lesser or equal to 255'
+                    }),
+                    500
+                )
+            else:
                 Lab = ConvertColor(
                     sRGBColor(Red, Green, Blue, True),
                     LabColor
@@ -60,10 +60,10 @@ class CubeSolverRgbToLab(APIResource):
                     }),
                     200
                 )
-            except Exception as E:
-                return MakeResponse(
-                    JsonResponse({
-                        'Message': 'Exception while converting rgb color to lab: {}'.format(E)
-                    }),
-                    500
-                )
+        except Exception as E:
+            return MakeResponse(
+                JsonResponse({
+                    'Message': 'Exception while converting rgb color to lab: {}'.format(E)
+                }),
+                500
+            )
