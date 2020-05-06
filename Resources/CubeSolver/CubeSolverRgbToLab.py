@@ -1,6 +1,10 @@
+# API Imports
 from flask import jsonify as JsonResponse
 from flask import make_response as MakeResponse
 from flask_restful import Resource as APIResource
+
+# Colormath
+from colormath.color_objects import sRGBColor, LabColor
 
 class CubeSolverRgbToLab(APIResource):
     def get(self, Red, Green, Blue):
@@ -26,11 +30,20 @@ class CubeSolverRgbToLab(APIResource):
                 500
             )
         else:
-            return MakeResponse(
-                JsonResponse({
-                    'Red': Red,
-                    'Green': Green,
-                    'Blue': Blue
-                }),
-                200
-            )
+            try:
+                return MakeResponse(
+                    JsonResponse({
+                        'Lab': ConvertColor(
+                            sRGBColor(Red, Green, Blue, True),
+                            LabColor
+                        )
+                    }),
+                    200
+                )
+            except Exception as E:
+                return MakeResponse(
+                    JsonResponse({
+                        'Message': 'Exception while converting rgb color to lab: {}'.format(E)
+                    }),
+                    500
+                )
