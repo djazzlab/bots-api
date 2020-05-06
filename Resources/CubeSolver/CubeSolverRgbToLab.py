@@ -8,9 +8,24 @@ from colormath.color_objects import sRGBColor, LabColor
 
 # Parse arguments in the request body
 ArgsParser = ReqParser.RequestParser()
-ArgsParser.add_argument('red', type = int, help = 'Red code of the RGB color to convert')
-ArgsParser.add_argument('green', type = int, help = 'Green code of the RGB color to convert')
-ArgsParser.add_argument('blue', type = int, help = 'Blue code of the RGB color to convert')
+ArgsParser.add_argument(
+    'red',
+    help = 'Red code of the RGB color to convert',
+    required = True,
+    type = int
+)
+ArgsParser.add_argument(
+    'green',
+    help = 'Green code of the RGB color to convert',
+    required = True,
+    type = int
+)
+ArgsParser.add_argument(
+    'blue',
+    help = 'Blue code of the RGB color to convert',
+    required = True,
+    type = int
+)
 
 class CubeSolverRgbToLab(APIResource):
     def get(self):
