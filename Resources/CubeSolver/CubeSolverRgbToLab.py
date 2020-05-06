@@ -39,17 +39,11 @@ class CubeSolverRgbToLab(APIResource):
             Blue = Args['blue']
 
             if Red < 0 or Red > 255:
-                return {
-                    'Message': 'Red integer should be greater or equal to 0 and lesser or equal to 255'
-                }, 500
+                raise 'Red integer should be greater or equal to 0 and lesser or equal to 255'
             elif Green < 0 or Green > 255:
-                return {
-                    'Message': 'Green integer should be greater or equal to 0 and lesser or equal to 255'
-                }, 500
+                raise 'Green integer should be greater or equal to 0 and lesser or equal to 255'
             elif Blue < 0 or Blue > 255:
-                return {
-                    'Message': 'Blue integer should be greater or equal to 0 and lesser or equal to 255'
-                }, 500
+                raise 'Blue integer should be greater or equal to 0 and lesser or equal to 255'
             else:
                 Lab = ConvertColor(
                     sRGBColor(Red, Green, Blue, True),
@@ -66,5 +60,5 @@ class CubeSolverRgbToLab(APIResource):
                 }
         except Exception as E:
             return {
-                'Message': 'Exception while converting rgb color to lab: {}'.format(E)
+                'Message': str(E)
             }, 500
