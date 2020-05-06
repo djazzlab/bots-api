@@ -28,22 +28,16 @@ class CubeSolverRgbToLab(APIResource):
         )
         self.__ArgsParser.add_argument(
             'blue',
-            help = 'Blue  argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
+            help = 'Blue argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
             nullable = False,
             required = True,
             type = int
         )
 
-        {
-            "message":  {
-                "red": "foo error message",
-                "green": "bar error message"
-            }
-        }
-
     def get(self):
         try:
             Args = self.__ArgsParser.parse_args(strict = True)
+            print('yolo')
             Red = Args['red']
             Green = Args['green']
             Blue = Args['blue']
