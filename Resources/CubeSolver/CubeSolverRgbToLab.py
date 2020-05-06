@@ -11,29 +11,32 @@ class CubeSolverRgbToLab(APIResource):
     
     def __init__(self):
         # Parse arguments in the request body
-        self.__ArgsParser = ReqParser.RequestParser(bundle_errors = True)
+        self.__ArgsParser = ReqParser.RequestParser()
         self.__ArgsParser.add_argument(
             'red',
-            help = 'Red argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
+            help = '{error_msg}',
+            nullable = False,
             required = True,
             type = int
         )
         self.__ArgsParser.add_argument(
             'green',
             help = 'Green argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
+            nullable = False,
             required = True,
             type = int
         )
         self.__ArgsParser.add_argument(
             'blue',
             help = 'Blue  argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
+            nullable = False,
             required = True,
             type = int
         )
 
     def get(self):
         try:
-            Args = self.__ArgsParser.parse_args()
+            Args = self.__ArgsParser.parse_args(strict = True)
             Red = Args['red']
             Green = Args['green']
             Blue = Args['blue']
