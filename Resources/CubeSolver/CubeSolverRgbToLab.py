@@ -1,6 +1,4 @@
 # API Imports
-from flask import jsonify as JsonResponse
-from flask import make_response as MakeResponse
 from flask_restful import reqparse as ReqParser
 from flask_restful import Resource as APIResource
 
