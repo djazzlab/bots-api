@@ -4,6 +4,7 @@ from flask import make_response as MakeResponse
 from flask_restful import Resource as APIResource
 
 # Colormath
+from colormath.color_conversions import convert_color as ConvertColor
 from colormath.color_objects import sRGBColor, LabColor
 
 class CubeSolverRgbToLab(APIResource):
