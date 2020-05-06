@@ -32,12 +32,19 @@ class CubeSolverRgbToLab(APIResource):
             )
         else:
             try:
+                Lab = ConvertColor(
+                    sRGBColor(Red, Green, Blue, True),
+                    LabColor
+                )
+                LabTuple = Lab.get_value_tuple()
+
                 return MakeResponse(
                     JsonResponse({
-                        'Lab': ConvertColor(
-                            sRGBColor(Red, Green, Blue, True),
-                            LabColor
-                        )
+                        'Lab': {
+                            'L': LabTuple[0],
+                            'A': LabTuple[1],
+                            'B': LabTuple[2]
+                        }
                     }),
                     200
                 )
