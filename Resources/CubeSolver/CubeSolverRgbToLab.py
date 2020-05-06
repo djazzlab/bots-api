@@ -14,7 +14,7 @@ class CubeSolverRgbToLab(APIResource):
         self.__ArgsParser = ReqParser.RequestParser()
         self.__ArgsParser.add_argument(
             'red',
-            help = '{error_msg}',
+            help = 'Red argument is required and must be an integer greater or equal to 0 and lesser or equal to 255',
             nullable = False,
             required = True,
             type = int
@@ -33,6 +33,13 @@ class CubeSolverRgbToLab(APIResource):
             required = True,
             type = int
         )
+
+        {
+            "message":  {
+                "red": "foo error message",
+                "green": "bar error message"
+            }
+        }
 
     def get(self):
         try:
