@@ -39,11 +39,11 @@ class CubeSolverRgbToLab(APIResource):
             Blue = Args['blue']
 
             if Red < 0 or Red > 255:
-                raise 'Red integer should be greater or equal to 0 and lesser or equal to 255'
+                raise Exception('Red integer should be greater or equal to 0 and lesser or equal to 255')
             elif Green < 0 or Green > 255:
-                raise 'Green integer should be greater or equal to 0 and lesser or equal to 255'
+                raise Exception('Green integer should be greater or equal to 0 and lesser or equal to 255')
             elif Blue < 0 or Blue > 255:
-                raise 'Blue integer should be greater or equal to 0 and lesser or equal to 255'
+                raise Exception('Blue integer should be greater or equal to 0 and lesser or equal to 255')
             else:
                 Lab = ConvertColor(
                     sRGBColor(Red, Green, Blue, True),
