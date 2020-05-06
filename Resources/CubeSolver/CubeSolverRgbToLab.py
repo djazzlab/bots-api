@@ -6,31 +6,34 @@ from flask_restful import Resource as APIResource
 from colormath.color_conversions import convert_color as ConvertColor
 from colormath.color_objects import sRGBColor, LabColor
 
-# Parse arguments in the request body
-ArgsParser = ReqParser.RequestParser()
-ArgsParser.add_argument(
-    'red',
-    help = 'Red code of the RGB color to convert',
-    required = True,
-    type = int
-)
-ArgsParser.add_argument(
-    'green',
-    help = 'Green code of the RGB color to convert',
-    required = True,
-    type = int
-)
-ArgsParser.add_argument(
-    'blue',
-    help = 'Blue code of the RGB color to convert',
-    required = True,
-    type = int
-)
-
 class CubeSolverRgbToLab(APIResource):
+    __ArgsParser = None
+    
+    def __init__(self):
+        # Parse arguments in the request body
+        self.__ArgsParser = ReqParser.RequestParser()
+        self.__ArgsParser.add_argument(
+            'red',
+            help = 'Red code of the RGB color to convert',
+            required = True,
+            type = int
+        )
+        self.__ArgsParser.add_argument(
+            'green',
+            help = 'Green code of the RGB color to convert',
+            required = True,
+            type = int
+        )
+        self.__ArgsParser.add_argument(
+            'blue',
+            help = 'Blue code of the RGB color to convert',
+            required = True,
+            type = int
+        )
+
     def get(self):
         try:
-            Args = ArgsParser.parse_args()
+            Args = self.__ArgsParser.parse_args()
             Red = Args['red']
             Green = Args['green']
             Blue = Args['blue']
