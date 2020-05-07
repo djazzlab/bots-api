@@ -16,13 +16,13 @@ class CubeSolverColorsFromJson(APIResource):
             'base_colors',
             location = 'json',
             store_missing = False,
-            type = list
+            type = dict
         )
         self.__ArgsParser.add_argument(
             'scanned_colors',
             location = 'json',
             store_missing = False,
-            type = list
+            type = dict
         )
 
     def get(self):
