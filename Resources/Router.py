@@ -1,4 +1,5 @@
 # Import API controllers
+from Resources.CubeSolver.CubeSolverColorsFromJson import CubeSolverColorsFromJson
 from Resources.CubeSolver.CubeSolverLabsDistance import CubeSolverLabsDistance
 from Resources.CubeSolver.CubeSolverRgbToLab import CubeSolverRgbToLab
 
