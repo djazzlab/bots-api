@@ -3,6 +3,7 @@ from flask_restful import reqparse as ReqParser
 from flask_restful import Resource as APIResource
 
 # Colormath
+from colormath.color_conversions import convert_color as ConvertColor
 from colormath.color_diff import delta_e_cie2000 as DeltaCie2000
 from colormath.color_objects import sRGBColor, LabColor
 
