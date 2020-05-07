@@ -29,55 +29,42 @@ class CubeSolverColorsFromJson(APIResource):
         try:
             Args = self.__ArgsParser.parse_args(strict = True)
 
-            print(Args)
-
-            LAB1 = tuple()
-            LAB2 = tuple()
-
-            if 'lab1_lightness' in Args:
-                LAB1 += (Args['lab1_lightness'],)
+            if 'base_colors' in Args:
+                BaseColors = Args['base_colors']
             else:
-                raise Exception('Your request body must have a value for the lab1_lightness argument')
+                raise Exception('Your request body must have a json content for the base_colors argument')
 
-            if 'lab1_dim_a' in Args:
-                LAB1 += (Args['lab1_dim_a'],)
+            if 'scanned_colors' in Args:
+                ScannedColors = Args['scanned_colors']
             else:
-                raise Exception('Your request body must have a value for the lab1_dim_a argument')
-            
-            if 'lab1_dim_b' in Args:
-                LAB1 += (Args['lab1_dim_b'],)
-            else:
-                raise Exception('Your request body must have a value for the lab1_dim_b argument')
+                raise Exception('Your request body must have a json content for the scanned_colors argument')
 
-            if 'lab2_lightness' in Args:
-                LAB2 += (Args['lab2_lightness'],)
-            else:
-                raise Exception('Your request body must have a value for the lab2_lightness argument')
+            AnalyzedSquares = {}
+            for (SquarePosition, (RedCode, GreenCode, BlueCode)) in ScannedColors.items():
+                Lab = ConvertColor(
+                    sRGBColor(RedCode, GreenCode, BlueCode, True),
+                    LabColor
+                )
 
-            if 'lab2_dim_a' in Args:
-                LAB2 += (Args['lab2_dim_a'],)
-            else:
-                raise Exception('Your request body must have a value for the lab2_dim_a argument')
-            
-            if 'lab2_dim_b' in Args:
-                LAB2 += (Args['lab2_dim_b'],)
-            else:
-                raise Exception('Your request body must have a value for the lab2_dim_b argument')
+                CieData = []
+                for (ColorShortName, LABColorCode) in BaseColors.items():
+                    Distance = DeltaCie2000(
+                        Lab,
+                        LabColor(
+                            lab_l = LABColorCode[0],
+                            lab_a = LABColorCode[1],
+                            lab_b = LABColorCode[2]
+                        )
+                    )
 
-            self.__LABColor1 = LabColor(
-                lab_l = float(LAB1[0]),
-                lab_a = float(LAB1[1]),
-                lab_b = float(LAB1[2])
-            )
-
-            self.__LABColor2 = LabColor(
-                lab_l = float(LAB2[0]),
-                lab_a = float(LAB2[1]),
-                lab_b = float(LAB2[2])
-            )
+                    CieData.append((Distance, ColorShortName))
+                
+                CieData = sorted(CieData)
+                if len(CieData) > 0:
+                    AnalyzedSquares[SquarePosition] = CieData[0][1]
 
             return {
-                'Distance': DeltaCie2000(self.__LABColor1, self.__LABColor2)
+                'Result': AnalyzedSquares
             }
         except Exception as E:
             return {
