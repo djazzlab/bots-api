@@ -13,7 +13,13 @@ class CubeSolverColorsFromJson(APIResource):
         # Parse arguments in the request body
         self.__ArgsParser = ReqParser.RequestParser()
         self.__ArgsParser.add_argument(
-            'data',
+            'base_colors',
+            location = 'json',
+            store_missing = False,
+            type = list
+        )
+        self.__ArgsParser.add_argument(
+            'scanned_colors',
             location = 'json',
             store_missing = False,
             type = list
